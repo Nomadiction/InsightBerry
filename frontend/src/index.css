@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gradient-to-br from-blue-50 to-white text-gray-900 antialiased leading-relaxed;
+  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+}
+
+.dark body {
+  @apply bg-gray-900 text-gray-100;
+}
+
+a {
+  @apply text-blue-600 hover:text-blue-800 transition-colors duration-200;
+}
+
+.dark a {
+  @apply text-blue-300 hover:text-blue-100;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+

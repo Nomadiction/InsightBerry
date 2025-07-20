@@ -1,0 +1,20 @@
+# IDE и системные
+.vscode/
+.idea/
+__pycache__/
+*.log
+
+# Python окружение
+backend/venv/
+
+# Node-модули
+frontend/node_modules/
+
+# Секреты (если будут)
+.env
+.env.local
+
+# Временные файлы и база данных
+images/
+*.db
+*.sqlite3

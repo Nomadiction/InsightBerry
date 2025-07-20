@@ -1,0 +1,46 @@
+blueberry-analyzer/
+├── backend/
+│    ├── venv/
+│    │   └── ...
+│    │
+│    ├── main.py
+│    ├── model_state.pt
+│    └── requirements.txt
+│  
+├── frontend/
+│    ├── node_models/
+│    │   └── ...
+│    │
+│    ├── public/
+│    │   ├── index.html
+│    │   ├── favicon.ico
+│    │   ├── logo192.png
+│    │   ├── logo512.png
+│    │   ├── manifest.json
+│    │   └── robots.txt
+│    │
+│    ├── src/
+│    │   ├── api/
+│    │   │   └── mockApi.js
+│    │   ├── components/
+│    │   │   ├── UploadForm.jsx
+│    │   │   ├── ResultCard.jsx
+│    │   │   └── ErrorBoundary.jsx
+│    │   ├── pages/
+│    │   │   ├── Home.jsx
+│    │   │   └── History.jsx   
+│    │   ├── utils/
+│    │   │   └── historyStorage.js    
+│    │   ├── App.js
+│    │   ├── index.js
+│    │   └── index.css
+│    │
+│    ├── tailwind.config.js
+│    ├── postcss.config.js
+│    ├── .gitignore
+│    ├── README.md
+│    ├── package.json
+│    └── package-lock.json
+│   
+├── .gitignore
+└── README.md
