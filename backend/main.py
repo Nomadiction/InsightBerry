@@ -1,6 +1,7 @@
 # backend/main.py
 
 from fastapi import FastAPI, UploadFile, File, Depends
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
