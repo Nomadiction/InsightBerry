@@ -245,3 +245,6 @@ def export_history(db: Session = Depends(get_db)):
         )
 
 
+@app.get("/")
+def read_root():
+    return JSONResponse(content={"status": "OK", "message": "InsightBerry backend is live!"})
