@@ -1,5 +1,5 @@
 # Используем slim-версию Python
-FROM python:3.10-slim
+FROM python:3.13-rc-slim
 
 # Устанавливаем рабочую директорию
 WORKDIR /app

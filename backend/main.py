@@ -29,8 +29,8 @@ models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 @app.get("/")
-def root():
-    return {"status": "ok"}
+def read_root():
+    return {"message": "InsightBerry backend is alive!"}
 
 app.add_middleware(
     CORSMiddleware,
