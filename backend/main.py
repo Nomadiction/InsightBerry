@@ -1,7 +1,6 @@
 # backend/main.py
 
 from fastapi import FastAPI, UploadFile, File, Depends
-from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
@@ -28,6 +27,10 @@ import urllib.parse
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+@app.get("/")
+def root():
+    return {"status": "ok"}
 
 app.add_middleware(
     CORSMiddleware,
@@ -243,8 +246,3 @@ def export_history(db: Session = Depends(get_db)):
                 "Cache-Control": "no-cache"
             }
         )
-
-
-@app.get("/")
-def read_root():
-    return JSONResponse(content={"status": "OK", "message": "InsightBerry backend is live!"})

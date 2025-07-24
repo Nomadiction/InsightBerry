@@ -1,10 +1,11 @@
-app = "insightberry-backend"
+app = 'insightberry-backend'
+primary_region = 'waw'
 
 [build]
-  dockerfile = "Dockerfile"
+  dockerfile = 'Dockerfile'
 
 [env]
-  PORT = "8080"
+  PORT = '8080'
 
 [services]
   internal_port = 8080
@@ -17,3 +18,12 @@ app = "insightberry-backend"
   [[services.ports]]
     handlers = ["tls", "http"]
     port = 443
+
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+
+[[vm]]
+  memory = "16gb"
+  cpu_kind = "performance"
+  cpus = 4
