@@ -1,4 +1,4 @@
-app = "InsightBerry"  
+app = "insightberry-backend"  
 
 [build]
 dockerfile = "Dockerfile"

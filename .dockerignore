@@ -1,8 +1,14 @@
+.*
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.env
-.vscode/
-.git/
+*.db
+*.sqlite3
+*.log
 frontend/
+*.ipynb
+*.pt
+*.pth
+__MACOSX
+.env
