@@ -34,7 +34,7 @@ def read_root():
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # В продакшене — ограничь
+    allow_origins=["https://insightberry-backend.fly.dev"],  # В продакшене — огранить
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -23,7 +23,7 @@ export default function History() {
   const [adviceItem, setAdviceItem] = useState(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/history")
+    fetch(`${API_BASE}/history`)
       .then(res => res.json())
       .then(data => {
         const adapted = data.map(item => ({
@@ -52,7 +52,7 @@ export default function History() {
 
   const handleDelete = async (imageId) => {
     try {
-      await fetch(`http://127.0.0.1:8000/history/${imageId}`, { method: "DELETE" });
+      await fetch(`${API_BASE}/history/${imageId}`, { method: "DELETE" });
       setHistory(prev => prev.filter(item => item.imageId !== imageId));
     } catch (error) {
       console.error("Ошибка удаления:", error);
@@ -60,7 +60,7 @@ export default function History() {
   };
 
   const handleClearHistory = async () => {
-    await fetch(`http://127.0.0.1:8000/history`, { method: "DELETE" });
+    await fetch(`${API_BASE}/history`, { method: "DELETE" });
     setHistory([]);
     setConfirmDelete(false);
   };
@@ -172,7 +172,7 @@ export default function History() {
                       setMenuOpen(false);
                       // Создаем скрытую ссылку для скачивания
                       const link = document.createElement('a');
-                      link.href = "http://127.0.0.1:8000/history/export";
+                      link.href = `${API_BASE}/history/export`;
                       link.download = "blueberry-analysis-history.pdf";
                       link.style.display = 'none';
                       document.body.appendChild(link);
