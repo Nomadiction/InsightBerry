@@ -4,6 +4,8 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Trash2, MoreVertical, Filter, HelpCircle, Info } from "lucide-react";
 
+const API_BASE = process.env.REACT_APP_API_URL;
+
 export default function History() {
   const scrollRef = useRef(null);
   const isDragging = useRef(false);

@@ -18,3 +18,4 @@ frontend/node_modules/
 images/
 *.db
 *.sqlite3
+.vercel
