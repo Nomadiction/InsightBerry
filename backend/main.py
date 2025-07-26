@@ -28,25 +28,26 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-@app.get("/")
-def read_root():
-    return {"message": "InsightBerry backend is alive!"}
-
-origins = [
-    "https://insight-berry.vercel.app",    # фронтенд
-    "https://t.me",                         # Telegram WebApp
-    "https://web.telegram.org",             # Telegram WebApp full
-    "https://web.telegram.org/k",           # Telegram на мобиле
-    "*",                                    # временно для отладки
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=[
+        "https://insight-berry.vercel.app",
+        "https://t.me",
+        "https://web.telegram.org",
+        "https://web.telegram.org/k",
+        "capacitor://localhost",         
+        "http://localhost:8080",         
+        "http://127.0.0.1:8080",
+        "https://insightberry-backend.fly.dev"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/")
+def read_root():
+    return {"message": "InsightBerry backend is alive!"}
 
 # Статическая папка для изображений
 UPLOAD_DIR = "images"
