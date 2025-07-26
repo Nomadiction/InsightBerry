@@ -12,7 +12,7 @@ export async function analyzeImage(file) {
   });
 
   if (!response.ok) {
-    throw new Error("Ошибка при анализе изображения");
+    throw new Error(`Ошибка: ${response.statusText}`);
   }
 
   const data = await response.json();
