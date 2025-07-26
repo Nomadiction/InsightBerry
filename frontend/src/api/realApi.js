@@ -1,6 +1,6 @@
 // frontend/src/api/realApi.js
 
-const API_BASE = "/api";
+const API_BASE = "https://insightberry-backend.fly.dev/analyze";
 
 export async function analyzeImage(file) {
   const formData = new FormData();
