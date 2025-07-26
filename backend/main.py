@@ -128,7 +128,7 @@ def get_history(db: Session = Depends(get_db)):
             "status": r.result,
             "confidence": r.confidence,
             "timestamp": r.timestamp.isoformat(),
-            "imageUrl": f"http://127.0.0.1:8000/history/image/{r.filename}"  
+            "imageUrl": f"https://insightberry-backend.fly.dev/history/image/{r.filename}"
         }
         for r in records
     ]
@@ -248,5 +248,4 @@ def export_history(db: Session = Depends(get_db)):
         )
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:main", host="0.0.0.0", port=8080, reload=False)
+    uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=False)
