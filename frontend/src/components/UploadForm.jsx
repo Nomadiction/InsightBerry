@@ -97,6 +97,7 @@ export default function UploadForm() {
       const base64 = await toBase64(image);
       const analysisWithImage = { ...analysis, imageUrl: base64 };
       setResult(analysisWithImage);
+      localStorage.setItem("updateHistory", Date.now());
 
       console.log("ANALYSIS RESULT", analysis);
       console.log("BASE64", base64);

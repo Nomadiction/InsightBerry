@@ -38,6 +38,26 @@ export default function History() {
   }, []);
 
   useEffect(() => {
+    const handleStorageUpdate = (e) => {
+      if (e.key === "updateHistory") {
+        fetch(`${API_BASE}/history`)
+          .then(res => res.json())
+          .then(data => {
+            const adapted = data.map(item => ({
+              ...item,
+              timestamp: new Date(item.timestamp).toLocaleString(),
+            }));
+            setHistory(adapted);
+          })
+          .catch(err => console.error("Ошибка обновления истории:", err));
+      }
+    };
+  
+    window.addEventListener("storage", handleStorageUpdate);
+    return () => window.removeEventListener("storage", handleStorageUpdate);
+  }, []);  
+
+  useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 640);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
