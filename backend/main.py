@@ -8,7 +8,7 @@ from typing import List
 from PIL import Image
 import io
 import os
-import shutil
+import uvicorn
 import torch
 from torchvision import transforms
 from torchvision.models import resnet18
@@ -34,7 +34,7 @@ def read_root():
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://insight-berry.vercel.app/"],
+    allow_origins=["https://insight-berry.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -246,3 +246,7 @@ def export_history(db: Session = Depends(get_db)):
                 "Cache-Control": "no-cache"
             }
         )
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:main", host="0.0.0.0", port=8080, reload=False)
