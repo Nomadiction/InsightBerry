@@ -1,4 +1,4 @@
-// frontend/frontend/src/api/realApi.js
+// frontend/src/api/realApi.js
 
 const API_BASE = "/api";
 
@@ -21,6 +21,6 @@ export async function analyzeImage(file) {
     status: data.class_name,
     confidence: data.confidence,
     timestamp: new Date().toLocaleString(),
-    imageId: data.image_id, // не imageUrl!
+    imageId: data.image_id,
   };
 }

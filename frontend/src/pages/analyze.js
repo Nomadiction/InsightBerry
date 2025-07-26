@@ -12,15 +12,12 @@ export default async function handler(req, res) {
   }
 
   try {
-    const filteredHeaders = { ...req.headers };
-    delete filteredHeaders['content-length'];
-    delete filteredHeaders['host'];
-    delete filteredHeaders['connection'];
-    delete filteredHeaders['accept-encoding'];
-
     const response = await fetch("https://insightberry-backend.fly.dev/analyze", {
       method: "POST",
-      headers: filteredHeaders,
+      headers: {
+        ...req.headers,
+        host: "", // на всякий случай
+      },
       body: req,
     });
 
