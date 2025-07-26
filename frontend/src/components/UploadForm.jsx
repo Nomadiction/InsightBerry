@@ -7,14 +7,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import ResultCard from "./ResultCard";
 import { ErrorBoundary } from "./ErrorBoundary";
 
-window.onerror = function (message, error) {
-  alert(
-    "Глобальная ошибка: " +
-    message +
-    "\n" +
-    (error && error.stack ? error.stack : "")
-  );
+window.onerror = function (message, source, lineno, colno, error) {
+  if (message === "Script error." && !source) return;
+
+  console.error("Global error caught:", { message, source, lineno, colno, error });
+
+  if (error && error.stack) {
+    alert(
+      "Произошла ошибка:\n" + message + "\n" + error.stack
+    );
+  } else if (message && message !== "Script error.") {
+    alert("Ошибка: " + message);
+  }
 };
+
 
 export default function UploadForm() {
   const [image, setImage] = useState(null);
