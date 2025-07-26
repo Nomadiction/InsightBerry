@@ -32,9 +32,15 @@ app = FastAPI()
 def read_root():
     return {"message": "InsightBerry backend is alive!"}
 
+origins = [
+    "https://t.me/",                      # Telegram webview
+    "https://insight-berry.vercel.app/", # Vercel frontend
+    "https://insightberry-backend.fly.dev/",     # fly.io backend
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://insight-berry.vercel.app"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
