@@ -30,16 +30,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://insight-berry.vercel.app",
-        "https://t.me",
-        "https://web.telegram.org",
-        "https://web.telegram.org/k",
-        "capacitor://localhost",         
-        "http://localhost:8080",         
-        "http://127.0.0.1:8080",
-        "https://insightberry-backend.fly.dev"
-    ],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
