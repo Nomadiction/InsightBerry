@@ -33,9 +33,11 @@ def read_root():
     return {"message": "InsightBerry backend is alive!"}
 
 origins = [
-    "https://t.me/",                      # Telegram webview
-    "https://insight-berry.vercel.app/", # Vercel frontend
-    "https://insightberry-backend.fly.dev/",     # fly.io backend
+    "https://insight-berry.vercel.app",    # фронтенд
+    "https://t.me",                         # Telegram WebApp
+    "https://web.telegram.org",             # Telegram WebApp full
+    "https://web.telegram.org/k",           # Telegram на мобиле
+    "*",                                    # временно для отладки
 ]
 
 app.add_middleware(
