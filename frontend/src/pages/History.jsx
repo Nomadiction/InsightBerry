@@ -4,7 +4,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Trash2, MoreVertical, Filter, HelpCircle, Info } from "lucide-react";
 
-const API_BASE = "https://insightberry-backend.fly.dev";
+const API_BASE = "https://insightberry.onrender.com";
 
 export default function History() {
   const scrollRef = useRef(null);
