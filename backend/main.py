@@ -31,6 +31,7 @@ allow_origins = [
     "https://web.telegram.org",
     "https://web.telegram.org/k/",
     "https://web.telegram.org/k/#@InsightBerryBot",
+    "https://insightberry-backend.fly.dev",
 ]
 
 app = FastAPI()
@@ -98,10 +99,12 @@ def log_prediction_db(db: Session, filename: str, result: dict):
 # Анализ изображения
 @app.post("/analyze")
 async def analyze_image(file: UploadFile = File(...), db: Session = Depends(get_db)):
+    import uuid  # можно в начало файла, если хочешь
     contents = await file.read()
 
-    # Сохраняем файл в /images
-    filepath = os.path.join(UPLOAD_DIR, file.filename)
+    # Сохраняем файл под безопасным UUID-именем
+    safe_filename = f"{uuid.uuid4().hex}.jpg"
+    filepath = os.path.join(UPLOAD_DIR, safe_filename)
     with open(filepath, "wb") as f:
         f.write(contents)
 
@@ -120,8 +123,8 @@ async def analyze_image(file: UploadFile = File(...), db: Session = Depends(get_
         "confidence": round(confidence.item() * 100, 2)
     }
 
-    # Запись в базу
-    log_prediction_db(db, file.filename, result)
+    # Запись в базу уже под safe_filename
+    log_prediction_db(db, safe_filename, result)
 
     return result
 
@@ -255,4 +258,4 @@ def export_history(db: Session = Depends(get_db)):
         )
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=False)
+    uvicorn.run("main:app", host="0.0.0.0", port=10000, reload=False)

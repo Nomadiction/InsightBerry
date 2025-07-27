@@ -24,6 +24,7 @@ window.onerror = function (message, source, lineno, colno, error) {
 
 export default function UploadForm() {
   const [image, setImage] = useState(null);
+  const [imageBase64, setImageBase64] = useState(null);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -38,6 +39,16 @@ export default function UploadForm() {
     setImage(selected);
     setResult(null);
     setProgress(0);
+
+    // Сразу читаем base64!
+    const reader = new FileReader();
+    reader.readAsDataURL(selected);
+    reader.onload = () => setImageBase64(reader.result);
+    reader.onerror = (event) => {
+      alert("Ошибка чтения файла: " + (event?.target?.error?.message || "Неизвестная ошибка"));
+      setImage(null);
+      setImageBase64(null);
+    };
   };
 
   const handleDrop = (e) => {
@@ -72,13 +83,6 @@ export default function UploadForm() {
     setLoading(true);
     setProgress(0);
 
-    const toBase64 = (file) => new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-
     try {
       const interval = setInterval(() => {
         setProgress((prev) => {
@@ -94,14 +98,9 @@ export default function UploadForm() {
       clearInterval(interval);
       setProgress(100);
 
-      const base64 = await toBase64(image);
-      const analysisWithImage = { ...analysis, imageUrl: base64 };
+      const analysisWithImage = { ...analysis, imageUrl: imageBase64 };
       setResult(analysisWithImage);
       localStorage.setItem("updateHistory", Date.now());
-
-      console.log("ANALYSIS RESULT", analysis);
-      console.log("BASE64", base64);
-      console.log("analysisWithImage", analysisWithImage);
 
     } catch (error) {
       alert(

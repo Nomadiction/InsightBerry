@@ -1,8 +1,8 @@
 // frontend/src/pages/History.jsx
 
 import { useEffect, useState, useRef, useCallback } from "react";
-import { motion } from "framer-motion";
-import { Trash2, MoreVertical, Filter, HelpCircle, Info } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Trash2, MoreVertical, Filter, HelpCircle, Info} from "lucide-react";
 
 const API_BASE = "https://insightberry.onrender.com";
 
@@ -189,34 +189,6 @@ export default function History() {
                     <Filter className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                     Фильтрация
                   </button>
-                  <button
-                    onClick={() => {
-                      setMenuOpen(false);
-                      // Создаем скрытую ссылку для скачивания
-                      const link = document.createElement('a');
-                      link.href = `${API_BASE}/history/export`;
-                      link.download = "blueberry-analysis-history.pdf";
-                      link.style.display = 'none';
-                      document.body.appendChild(link);
-                      link.click();
-                      document.body.removeChild(link);
-                    }}
-                    className="w-full flex items-center gap-2 text-left px-4 py-2 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900 font-semibold rounded-xl transition"
-                  >
-                    <svg
-                      className="w-5 h-5 text-green-600 dark:text-green-400"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
-                      <path d="M7 10l5 5 5-5" />
-                      <path d="M12 15V3" />
-                    </svg>
-                    Экспорт PDF
-                  </button>
-
                   {history.length > 0 && (
                     <button
                       onClick={() => {
@@ -364,25 +336,39 @@ export default function History() {
           />
         )}
 
-        {adviceItem && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-            <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-6 w-full max-w-md border border-gray-200 dark:border-gray-700 relative">
-              <button
-                onClick={() => setAdviceItem(null)}
-                className="absolute top-3 right-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-full p-2 hover:bg-gray-200 dark:hover:bg-gray-700 focus:ring-2 focus:ring-blue-400 transition"
-                aria-label="Закрыть"
+        <AnimatePresence>
+          {adviceItem && (
+            <motion.div
+              key="advice-modal"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
+            >
+              <motion.div
+                initial={{ scale: 0.85, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.85, opacity: 0 }}
+                transition={{ type: "spring", stiffness: 260, damping: 22 }}
+                className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-6 w-[90vw] max-w-xs sm:max-w-sm border border-gray-200 dark:border-gray-700 relative"
               >
-                <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
-                  <path d="M6 6l12 12M6 18L18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              </button>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">Рекомендации</h3>
-              <p className="text-gray-700 dark:text-gray-300 text-base whitespace-pre-line">
-                {getAdviceText(adviceItem.status)}
-              </p>
-            </div>
-          </div>
-        )}
+                <button
+                  onClick={() => setAdviceItem(null)}
+                  className="absolute top-3 right-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-full p-2 hover:bg-gray-200 dark:hover:bg-gray-700 focus:ring-2 focus:ring-blue-400 transition"
+                  aria-label="Закрыть"
+                >
+                  <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path d="M6 6l12 12M6 18L18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  </svg>
+                </button>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4 text-center">Рекомендация</h3>
+                <p className="text-gray-700 dark:text-gray-300 text-base whitespace-pre-line break-words">
+                  {getAdviceText(adviceItem.status)}
+                </p>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {showHelp && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
@@ -465,7 +451,7 @@ export default function History() {
           ) : (
             <div
               ref={scrollRef}
-              className="flex-1 w-full max-h-[70vh] overflow-y-auto px-2 py-2 pb-6 hide-scrollbar"
+              className="flex-1 w-full max-h-[60vh] overflow-y-auto px-2 py-2 pb-6 hide-scrollbar"
             >
               <ul className="flex flex-col gap-4">
                 {filteredHistory.map((item, index) => (
@@ -501,6 +487,7 @@ function HistoryCard({ item, index, onDelete, setExpandedImageUrl, setAdviceItem
       console.warn("History item без imageId:", item);
       return;
     }
+    // Формируем ссылку, если imageUrl нет
     setImageUrl(item.imageUrl);
   }, [item]);
 
@@ -560,62 +547,45 @@ function HistoryCard({ item, index, onDelete, setExpandedImageUrl, setAdviceItem
         damping: 12,
         delay: index * 0.06
       }}
-      className="group flex flex-row items-center gap-4 p-5 rounded-2xl shadow-lg bg-gray-50/95 dark:bg-gray-800/95 border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition relative"
+      className="group flex flex-col sm:flex-row items-center gap-3 sm:gap-4 p-3 sm:p-5 rounded-2xl shadow-lg bg-gray-50/95 dark:bg-gray-800/95 border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition relative w-full max-w-xs sm:max-w-2xl mx-auto"
     >
-      {imageUrl && (
-        <img
-          src={imageUrl}
-          alt="preview"
-          onClick={() => setExpandedImageUrl(imageUrl)}
-          className="w-24 h-24 object-cover rounded-xl border border-gray-200 dark:border-gray-700 shadow cursor-zoom-in transition"
-        />
-      )}
-      <div className="flex-1 flex flex-col justify-center">
-        <p className="font-semibold text-blue-700 dark:text-blue-200 mb-1">{item.status}</p>
-        <p className="text-sm text-gray-700 dark:text-gray-200 mb-1">
+      <img
+        src={imageUrl || "/logo192.png"}
+        alt="preview"
+        className="w-16 h-16 sm:w-24 sm:h-24 object-cover rounded-xl border border-gray-200 dark:border-gray-700 shadow transition mb-2 sm:mb-0"
+        onError={e => { e.target.onerror = null; e.target.src = "/logo192.png"; }}
+        draggable={false}
+      />
+      <div className="flex-1 flex flex-col justify-center w-full">
+        <p
+          className="font-semibold text-blue-700 dark:text-blue-200 mb-1 text-base sm:text-lg cursor-pointer hover:underline"
+          onClick={() => imageUrl && setExpandedImageUrl(imageUrl)}
+        >
+          {item.status}
+        </p>
+        <p className="text-sm sm:text-base text-gray-700 dark:text-gray-200 mb-1">
           Уверенность: <span className="font-medium">{item.confidence}%</span>
         </p>
-        <p className="text-xs text-gray-400 dark:text-gray-500">{item.timestamp}</p>
+        <p className="text-xs sm:text-sm text-gray-400 dark:text-gray-500">{item.timestamp}</p>
       </div>
-
+      {/* Кнопка рекомендаций */}
+      <div className="absolute top-3 right-11">
+        <button
+          onClick={() => setAdviceItem(item)}
+          className="p-1 rounded-full bg-transparent opacity-100 hover:bg-blue-100 dark:hover:bg-blue-800 transition"
+          aria-label="Рекомендации"
+        >
+          <Info className="w-5 h-5 text-blue-500 dark:text-blue-300 hover:text-blue-600 dark:hover:text-blue-100" />
+        </button>
+      </div>
       {/* Кнопка удаления */}
       <button
-        ref={buttonRef}
         onClick={() => setMenuOpen(v => !v)}
         className="absolute top-3 right-3 p-1 rounded-full bg-transparent opacity-100 hover:bg-pink-100 dark:hover:bg-pink-800 transition"
         aria-label="Удалить"
       >
         <Trash2 className="w-5 h-5 text-pink-400 dark:text-pink-500 hover:text-pink-600 dark:hover:text-pink-300" />
       </button>
-
-      {/* Кнопка рекомендаций */}
-      <div className="absolute top-3 right-11">
-        <div className="relative">
-          <button
-            ref={infoButtonRef}
-            onClick={() => setShowTooltip((prev) => !prev)}
-            className="p-1 rounded-full bg-transparent opacity-100 hover:bg-blue-100 dark:hover:bg-blue-800 transition"
-            aria-label="Рекомендации"
-          >
-            <Info className="w-5 h-5 text-blue-500 dark:text-blue-300 hover:text-blue-600 dark:hover:text-blue-100" />
-          </button>
-
-          {showTooltip && (
-            <motion.div
-              ref={tooltipRef}
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.2 }}
-              className="absolute right-0 mt-0 w-64 z-50 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-xl p-3 text-sm text-gray-800 dark:text-gray-100"
-            >
-              {getAdviceText(item.status)}
-            </motion.div>
-          )}
-
-        </div>
-      </div>
-
       {/* Меню удаления */}
       {menuOpen && (
         <div
