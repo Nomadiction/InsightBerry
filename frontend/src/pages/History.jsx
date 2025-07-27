@@ -494,6 +494,7 @@ function HistoryCard({ item, index, onDelete, setExpandedImageUrl, setAdviceItem
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
   const infoButtonRef = useRef(null);
+  const tooltipRef = useRef(null);
 
   useEffect(() => {
     if (!item.imageId) {
@@ -534,6 +535,19 @@ function HistoryCard({ item, index, onDelete, setExpandedImageUrl, setAdviceItem
       window.removeEventListener("scroll", handleScroll, true);
     };
   }, []);
+
+  useEffect(() => {
+    if (showTooltip && tooltipRef.current) {
+      const rect = tooltipRef.current.getBoundingClientRect();
+      if (rect.right > window.innerWidth) {
+        tooltipRef.current.style.right = "auto";
+        tooltipRef.current.style.left = "0";
+      } else {
+        tooltipRef.current.style.right = "0";
+        tooltipRef.current.style.left = "auto";
+      }
+    }
+  }, [showTooltip]);
 
   return (
     <motion.li
@@ -588,6 +602,7 @@ function HistoryCard({ item, index, onDelete, setExpandedImageUrl, setAdviceItem
 
           {showTooltip && (
             <motion.div
+              ref={tooltipRef}
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
