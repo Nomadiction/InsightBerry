@@ -8,6 +8,7 @@ from typing import List
 from PIL import Image
 import io
 import os
+import uuid 
 import uvicorn
 import torch
 from torchvision import transforms
@@ -26,11 +27,18 @@ import urllib.parse
 # ─────────────────────────────
 models.Base.metadata.create_all(bind=engine)
 
+allow_origins = [
+    "https://insight-berry.vercel.app",
+    "https://web.telegram.org",
+    "https://web.telegram.org/k/",
+    "https://web.telegram.org/k/#@InsightBerryBot",
+]
+
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allow_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -94,7 +102,10 @@ async def analyze_image(file: UploadFile = File(...), db: Session = Depends(get_
     contents = await file.read()
 
     # Сохраняем файл в /images
-    filepath = os.path.join(UPLOAD_DIR, file.filename)
+    ext = os.path.splitext(file.filename)[-1].lower() or ".jpg"  # расширение, если есть
+    filename = f"{uuid.uuid4().hex}{ext}"
+    filepath = os.path.join(UPLOAD_DIR, filename)
+
     with open(filepath, "wb") as f:
         f.write(contents)
 
@@ -116,6 +127,7 @@ async def analyze_image(file: UploadFile = File(...), db: Session = Depends(get_
     # Запись в базу
     log_prediction_db(db, file.filename, result)
 
+    result["image_id"] = filename
     return result
 
 # История анализов
