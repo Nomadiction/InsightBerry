@@ -386,7 +386,6 @@ export default function History() {
               <div className="text-gray-700 dark:text-gray-200 text-base space-y-3">
                 <p>В этом разделе отображается история всех ваших анализов.</p>
                 <ul className="list-disc pl-5 space-y-1">
-                  <li>Вы можете <b>экспортировать</b> историю в PDF.</li>
                   <li>Импортировать историю из файла (JSON).</li>
                   <li>Сортировать и фильтровать записи.</li>
                   <li>Для удаления отдельной записи используйте иконку корзины.</li>

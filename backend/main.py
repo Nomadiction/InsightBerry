@@ -26,12 +26,14 @@ import urllib.parse
 # ─────────────────────────────
 models.Base.metadata.create_all(bind=engine)
 
+API_BASE_URL = "https://insightberry.onrender.com/"
+
 allow_origins = [
     "https://insight-berry.vercel.app",
     "https://web.telegram.org",
     "https://web.telegram.org/k/",
     "https://web.telegram.org/k/#@InsightBerryBot",
-    "https://insightberry-backend.fly.dev",
+    "https://insightberry.onrender.com/",
 ]
 
 app = FastAPI()
@@ -138,7 +140,7 @@ def get_history(db: Session = Depends(get_db)):
             "status": r.result,
             "confidence": r.confidence,
             "timestamp": r.timestamp.isoformat(),
-            "imageUrl": f"https://insightberry-backend.fly.dev/history/image/{r.filename}"
+            "imageUrl": f"{API_BASE_URL.rstrip('/')}/history/image/{r.filename}"
         }
         for r in records
     ]
