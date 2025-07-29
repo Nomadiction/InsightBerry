@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
 import { Home as HomeIcon, History as HistoryIcon, Moon, Sun } from "lucide-react";
 import { motion } from "framer-motion";
-import Home from "./pages/Home";
+import UploadForm from "./pages/UploadForm"
 import History from "./pages/History";
 
 export default function App() {
@@ -68,10 +68,10 @@ export default function App() {
                 <NavLink
                   to="/"
                   className={({ isActive }) =>
-                    `relative inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 rounded-xl font-medium transition-all duration-200 ${
+                    `relative inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 rounded-xl font-medium transition-all duration-300 ${
                       isActive
-                        ? "text-blue-700 dark:text-blue-300 bg-blue-100/80 dark:bg-blue-900/40 shadow-sm"
-                        : "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/80 dark:hover:bg-gray-800/40"
+                        ? "text-blue-600 dark:text-blue-400 bg-blue-50/60 dark:bg-blue-900/30 shadow-sm"
+                        : "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50/60 dark:hover:bg-gray-800/30"
                     }`
                   }
                 >
@@ -80,7 +80,7 @@ export default function App() {
                   {({ isActive }) => isActive && (
                     <motion.div
                       layoutId="activeTab"
-                      className="absolute inset-0 bg-blue-100/80 dark:bg-blue-900/40 rounded-xl -z-10"
+                      className="absolute inset-0 bg-blue-50/60 dark:bg-blue-900/30 rounded-xl -z-10"
                       initial={false}
                       transition={{ type: "spring", stiffness: 500, damping: 30 }}
                     />
@@ -90,10 +90,10 @@ export default function App() {
                 <NavLink
                   to="/history"
                   className={({ isActive }) =>
-                    `relative inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 rounded-xl font-medium transition-all duration-200 ${
+                    `relative inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 rounded-xl font-medium transition-all duration-300 ${
                       isActive
-                        ? "text-blue-700 dark:text-blue-300 bg-blue-100/80 dark:bg-blue-900/40 shadow-sm"
-                        : "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/80 dark:hover:bg-gray-800/40"
+                        ? "text-blue-600 dark:text-blue-400 bg-blue-50/60 dark:bg-blue-900/30 shadow-sm"
+                        : "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50/60 dark:hover:bg-gray-800/30"
                     }`
                   }
                 >
@@ -102,7 +102,7 @@ export default function App() {
                   {({ isActive }) => isActive && (
                     <motion.div
                       layoutId="activeTab"
-                      className="absolute inset-0 bg-blue-100/80 dark:bg-blue-900/40 rounded-xl -z-10"
+                      className="absolute inset-0 bg-blue-50/60 dark:bg-blue-900/30 rounded-xl -z-10"
                       initial={false}
                       transition={{ type: "spring", stiffness: 500, damping: 30 }}
                     />
@@ -115,7 +115,7 @@ export default function App() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                   onClick={toggleTheme}
-                  className="relative p-2 sm:p-2.5 rounded-xl bg-gray-100/80 dark:bg-gray-800/80 hover:bg-gray-200/80 dark:hover:bg-gray-700/80 text-gray-600 dark:text-gray-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 shadow-sm"
+                  className="relative p-2 sm:p-2.5 rounded-xl bg-gray-50/60 dark:bg-gray-800/30 hover:bg-gray-100/60 dark:hover:bg-gray-700/40 text-gray-600 dark:text-gray-300 transition-all duration-300 focus:outline-none"
                   aria-label="Переключить тему"
                 >
                   <motion.div
@@ -134,7 +134,7 @@ export default function App() {
         {/* Main Content */}
         <main className="flex-1 px-4 sm:px-6 lg:px-8 py-6 max-w-7xl mx-auto">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<UploadForm />} />
             <Route path="/history" element={<History />} />
           </Routes>
         </main>

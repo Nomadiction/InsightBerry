@@ -23,6 +23,8 @@ export default function History() {
   const [filterType, setFilterType] = useState("date");
   const [sortDirection, setSortDirection] = useState("desc");
   const [adviceItem, setAdviceItem] = useState(null);
+  const [showDeleteSuccess, setShowDeleteSuccess] = useState(false);
+  const [deleteMessage, setDeleteMessage] = useState("");
 
   useEffect(() => {
     fetch(`${API_BASE}/history`)
@@ -76,6 +78,9 @@ export default function History() {
     try {
       await fetch(`${API_BASE}/history/${imageId}`, { method: "DELETE" });
       setHistory(prev => prev.filter(item => item.imageId !== imageId));
+      setDeleteMessage("Запись успешно удалена!");
+      setShowDeleteSuccess(true);
+      setTimeout(() => setShowDeleteSuccess(false), 3000);
     } catch (error) {
       console.error("Ошибка удаления:", error);
     }
@@ -86,6 +91,9 @@ export default function History() {
     setHistory([]);
     setConfirmDelete(false);
     setBottomSheetOpen(false);
+    setDeleteMessage("История успешно очищена!");
+    setShowDeleteSuccess(true);
+    setTimeout(() => setShowDeleteSuccess(false), 3000);
   };
 
   useEffect(() => {
@@ -190,6 +198,36 @@ export default function History() {
 
   return (
     <div className="w-full max-w-4xl mx-auto">
+      {/* Delete Success Message */}
+      <AnimatePresence>
+        {showDeleteSuccess && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="mb-6 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-xl p-4 flex items-center justify-between"
+          >
+            <div className="flex items-center space-x-3">
+              <Trash2 className="w-6 h-6 text-green-500" />
+              <div>
+                <p className="font-semibold text-green-800 dark:text-green-200">
+                  {deleteMessage}
+                </p>
+                <p className="text-sm text-green-600 dark:text-green-300">
+                  Операция выполнена успешно
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setShowDeleteSuccess(false)}
+              className="p-1 rounded-lg hover:bg-green-100 dark:hover:bg-green-800/40"
+            >
+              <X className="w-4 h-4 text-green-500" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Main Content Card */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
