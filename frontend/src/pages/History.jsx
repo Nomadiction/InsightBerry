@@ -139,31 +139,31 @@ export default function History() {
   }, []);
 
   // Тестовые карточки для отладки интерфейса
-  if (history.length === 0) {
-    setHistory([
-      {
-        imageId: "test1.jpg",
-        imageUrl: "https://via.placeholder.com/96x96.png?text=Healthy",
-        status: "Здоровое растение",
-        confidence: 98.7,
-        timestamp: new Date().toLocaleString()
-      },
-      {
-        imageId: "test2.jpg",
-        imageUrl: "https://via.placeholder.com/96x96.png?text=Stress",
-        status: "Растение в состоянии стресса",
-        confidence: 75.4,
-        timestamp: new Date(Date.now() - 1000 * 60 * 60).toLocaleString()
-      },
-      {
-        imageId: "test3.jpg",
-        imageUrl: "https://via.placeholder.com/96x96.png?text=Mold",
-        status: "Признаки плесени",
-        confidence: 89.1,
-        timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2).toLocaleString()
-      }
-    ]);
-  }
+  // if (history.length === 0) {
+  //   setHistory([
+  //     {
+  //       imageId: "test1.jpg",
+  //       imageUrl: "https://via.placeholder.com/96x96.png?text=Healthy",
+  //       status: "Здоровое растение",
+  //       confidence: 98.7,
+  //       timestamp: new Date().toLocaleString()
+  //     },
+  //     {
+  //       imageId: "test2.jpg",
+  //       imageUrl: "https://via.placeholder.com/96x96.png?text=Stress",
+  //       status: "Растение в состоянии стресса",
+  //       confidence: 75.4,
+  //       timestamp: new Date(Date.now() - 1000 * 60 * 60).toLocaleString()
+  //     },
+  //     {
+  //       imageId: "test3.jpg",
+  //       imageUrl: "https://via.placeholder.com/96x96.png?text=Mold",
+  //       status: "Признаки плесени",
+  //       confidence: 89.1,
+  //       timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2).toLocaleString()
+  //     }
+  //   ]);
+  // }
 
   let displayedHistory = [...history];
   if (filterType === "date") {

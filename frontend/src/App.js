@@ -53,7 +53,7 @@ export default function App() {
                     className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
                   />
                   <h1 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-gray-100 select-none">
-                    Blueberry Analyzer
+                    Insight Berry
                   </h1>
                 </div>
               </motion.div>
