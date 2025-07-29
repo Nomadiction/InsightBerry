@@ -205,24 +205,24 @@ export default function History() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="mb-6 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-xl p-4 flex items-center justify-between"
+            className="mb-6 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded-xl p-4 flex items-center justify-between"
           >
             <div className="flex items-center space-x-3">
-              <Trash2 className="w-6 h-6 text-green-500" />
+              <Trash2 className="w-6 h-6 text-red-500" />
               <div>
-                <p className="font-semibold text-green-800 dark:text-green-200">
+                <p className="font-semibold text-red-800 dark:text-red-200">
                   {deleteMessage}
                 </p>
-                <p className="text-sm text-green-600 dark:text-green-300">
+                <p className="text-sm text-red-600 dark:text-red-300">
                   Операция выполнена успешно
                 </p>
               </div>
             </div>
             <button
               onClick={() => setShowDeleteSuccess(false)}
-              className="p-1 rounded-lg hover:bg-green-100 dark:hover:bg-green-800/40"
+              className="p-1 rounded-lg hover:bg-red-100 dark:hover:bg-red-800/40"
             >
-              <X className="w-4 h-4 text-green-500" />
+              <X className="w-4 h-4 text-red-500" />
             </button>
           </motion.div>
         )}

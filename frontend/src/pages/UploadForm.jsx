@@ -383,13 +383,13 @@ export default function UploadForm() {
               <div className="space-y-4">
                 <div className="relative h-3 sm:h-4 rounded-full bg-gray-200 dark:bg-gray-700 shadow-inner overflow-hidden">
                   <motion.div
-                    className="h-full bg-blue-500 dark:bg-blue-700 rounded-full relative"
+                    className="h-full bg-blue-500 dark:bg-blue-700 rounded-full relative overflow-hidden"
                     style={{ width: `${progress}%` }}
                     initial={{ width: 0 }}
                     animate={{ width: `${progress}%` }}
                     transition={{ duration: 0.4, ease: "easeInOut" }}
                   >
-                    <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
+                    <div className="absolute inset-0 bg-white/20 animate-pulse rounded-full"></div>
                   </motion.div>
                 </div>
                 <div className="flex items-center justify-center gap-2">
