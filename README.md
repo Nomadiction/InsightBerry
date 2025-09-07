@@ -1,4 +1,4 @@
-<img width="333" height="66" alt="image" src="https://github.com/user-attachments/assets/b0c1d07e-a1d7-471f-b2d1-2371985e1fb4" /># Blueberry Analyzer 🍇
+<img width="911" height="62" alt="image" src="https://github.com/user-attachments/assets/3ed35a4b-7811-464d-a68c-c0a67701364e" /># Blueberry Analyzer 🍇
 
 **Blueberry Analyzer** — это полнофункциональное веб-приложение для анализа состояния растений черники по изображениям, с использованием нейросетевой модели и Grad-CAM визуализацией.
 Приложение поддерживает загрузку изображений, визуализацию тепловых карт внимания модели, экспорт/импорт истории в PDF и JSON, фильтрацию и рекомендации на основе ботанических и агрономических знаний.
@@ -33,6 +33,19 @@
 
 
 ---
+
+
+Общий вид интерфейса на странице “Главная” и “История” в белой теме
+
+<img width="1920" height="931" alt="{C5FF054D-E32A-4F82-94B7-FF3F96169C78}" src="https://github.com/user-attachments/assets/35006f54-7e9f-4db8-9e67-97391e11cf89" />
+<img width="1920" height="927" alt="{B43F414A-D9FE-4584-9C6F-C4405BFD312D}" src="https://github.com/user-attachments/assets/6d7ee739-6f8c-4d52-a7eb-5474e9740140" />
+
+
+Общий вид интерфейса на странице “Главная” и “История” в тёмной теме
+
+<img width="1920" height="929" alt="{2F6971EF-1670-4CE3-A4C8-2B80BD960057}" src="https://github.com/user-attachments/assets/7b06236d-e44c-446f-bc17-3af6afb18319" />
+<img width="1920" height="927" alt="{5C4BD759-B1F1-434E-91DC-378C7F84BB1E}" src="https://github.com/user-attachments/assets/da521576-6dc4-4385-a3c3-005a8c4b9041" />
+
 
 ## 🚀 Установка и запуск локально
 
