@@ -1,4 +1,4 @@
-# Blueberry Analyzer 🍇
+<img width="333" height="66" alt="image" src="https://github.com/user-attachments/assets/b0c1d07e-a1d7-471f-b2d1-2371985e1fb4" /># Blueberry Analyzer 🍇
 
 **Blueberry Analyzer** — это полнофункциональное веб-приложение для анализа состояния растений черники по изображениям, с использованием нейросетевой модели и Grad-CAM визуализацией.
 Приложение поддерживает загрузку изображений, визуализацию тепловых карт внимания модели, экспорт/импорт истории в PDF и JSON, фильтрацию и рекомендации на основе ботанических и агрономических знаний.
@@ -29,7 +29,8 @@
 
 ## 🌐 Онлайн демо (Telegram MiniApp)
 
-> *\[Добавь ссылку сюда]* 
+> @InsightBerryBot
+
 
 ---
 
@@ -104,14 +105,6 @@ npm run dev
 * Приложение **не использует** облачные сервисы
 * Все изображения и история хранятся **локально** на устройстве пользователя
 * Поддержка офлайн-режима без потери функционала
-
----
-
-## 📈 Планы на будущее
-
-I'll answer as a world-famous expert in agricultural AI systems and open-source software documentation, winner of the “Ecoinformatics Excellence Award” in the EU GreenTech Program.
-
-Вот блок **"📌 Планы на будущее"**, который можно вставить в `README.md`. Он отражает реальные направления развития проекта Blueberry Analyzer и при этом демонстрирует зрелость архитектуры и научную обоснованность подхода:
 
 ---
 
